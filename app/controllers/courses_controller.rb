@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
     def show
-        user = User.find_by(username: params[:username])
+        user = User.find(session[:user_id])
         render json: user.courses, status: :ok
     end
 end

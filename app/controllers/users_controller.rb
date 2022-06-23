@@ -22,6 +22,20 @@ class UsersController < ApplicationController
         end
     end
 
+    def destroy
+        user = User.find(session[:user_id])
+        user.destroy
+        session.delete(:user_id)
+        head :no_content, status: :ok
+    end
+
+    def update
+        user = User.find(session[:user_id])
+        user.update(username: params[:new_username])
+        render json: user, status: :ok
+        
+         
+    end
     private
 
     def user_params

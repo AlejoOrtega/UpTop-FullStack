@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
 
     def create
-        user = User.find_by(username: params[:username])
+        user = User.find(session[:user_id])
         plan = Plan.find_by(title: params[:title])
 
         newSubs = Subscription.create(user_id: user.id, plan_id: plan.id)
