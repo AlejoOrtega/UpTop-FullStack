@@ -37,8 +37,8 @@ const Profile = () => {
             <ProfileImage src={user} alt='profile-picture'/>
             <UserInfo>
                 <h1>User profile</h1>
-                <h3>Name: {currentUser.name + ' ' + currentUser.last_name}</h3>
-                <h3>Email: {currentUser.email}</h3>
+                <h3>{currentUser.name + ' ' + currentUser.last_name}</h3>
+                <h3>{currentUser.email}</h3>
                 <Section>
                     <h3>Update Username</h3>
                     <TextField sx={{marginRight: '10px;'}}placeholder='type new username' value={newUser} onChange={e => setNewUser(e.target.value) }/>

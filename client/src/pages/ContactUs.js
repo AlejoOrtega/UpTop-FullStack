@@ -24,7 +24,7 @@ const ContactUs = () => {
                 <TextField sx={{margin: '5px 0'}} placeholder='Email'/>
                 <TextField sx={{margin: '5px 0'}} placeholder='Phone Number'/>
                 <TextField sx={{margin: '5px 0'}} placeholder='Leave a Message'/>
-                <Button sx={{backgroundColor: Palette.SECONDARY, marginRight: '10px'}}variant="contained">Submit</Button>
+                <Button sx={{backgroundColor: Palette.SECONDARY, marginRight: '10px', alignSelf: 'center', width:'80%'}}variant="contained">Submit</Button>
             </Form>
         </SubBody>
     </Body> 

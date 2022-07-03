@@ -6,6 +6,7 @@ import ContactUs from './pages/ContactUs';
 import Plan from './pages/Plan';
 import MyCourse from './pages/MyCourse';
 import Profile from './pages/Profile';
+import Admin from './components/Admin';
 
 
 import { Routes, Route } from 'react-router-dom';
@@ -37,6 +38,7 @@ function App() {
           <Route path='plans' element={<Plan/>}/>
           <Route path='my-courses' element={<MyCourse/>}/>
           <Route path='profile' element={<Profile/>}/>
+          <Route path='admin' element={<Admin/>}/>
         </Route>
       </Routes>
     </div>

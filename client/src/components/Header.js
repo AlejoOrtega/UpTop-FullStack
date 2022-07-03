@@ -65,6 +65,7 @@ const Header = () => {
         if(currentUser !== ''){
             return (
                 <div style={{display: 'flex'}}>
+                    <Button sx={{backgroundColor: Palette.SECONDARY, marginRight: '10px', color: 'black'}}>Admin</Button>
                     <Button
                         variant='contained'
                         size="large"

@@ -1,6 +1,8 @@
 import React from 'react';
 import uptop from '../resources/images/uptop.png';
-import group from '../resources/images/class-group.png';
+import alert from '../resources/images/alert.png';
+import social from '../resources/images/social-care.png';
+import college from '../resources/images/college-graduation.png';
 
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -21,17 +23,17 @@ const Plan = () => {
             <BigImage src={uptop} alt='uptop'/>
             <InformationSupport>
                 <InfoBlock>
-                    <InfoImage src={group} alt='education'/>
+                    <InfoImage src={alert} alt='education'/>
                     <h4>Education</h4>
                     <p>Education is key to understanding how to trade. We enjoy having the opportunity to provide not only what you find in books but hands on training. Imagine being mentored and trading at the same time! The potential is limitless!</p>
                 </InfoBlock>
                 <InfoBlock>
-                    <InfoImage src={group} alt='community'/>
+                    <InfoImage src={social} alt='community'/>
                     <h4>Community Support</h4>
                     <p>You have probably heard and seen other trading communities offer their support to members but ask yourself.. do they Truly follow through with their statements? UPTOP prides itself with having a close nit community where traders meet each other and share ideas to ultimately be successful in their pursuit of happiness.</p>
                 </InfoBlock>
                 <InfoBlock>
-                    <InfoImage src={group} alt='signals'/>
+                    <InfoImage src={college} alt='signals'/>
                     <h4>Signals</h4>
                     <p>Have you ever been at a stop light and just waited for it to turn green? What if we told you that we can offer the same guidance towards trading? Think of it as an easy way to jump in and out of trades! We make sure you understand the lingo and opportunities as they come to your doorstep.</p>
                 </InfoBlock>
@@ -110,6 +112,7 @@ const InformationSupport = styled.div`
     justify-content: space-between;
     width: 100%;
     line-height: 1.6;
+    margin-top: 30px;
 
     > div {
         display: flex;
@@ -128,8 +131,9 @@ const InfoBlock = styled.div`
     }
 `
 const InfoImage = styled.img`
-    width: 325px;
-    height: 225px;
+    width: 200px;
+    height: 200px;
+    align-self: center;
     margin-bottom: 10px;
 ` 
 
