@@ -7,10 +7,12 @@ import { BrowserRouter } from 'react-router-dom';
 import {configureStore} from '@reduxjs/toolkit'
 import {Provider} from 'react-redux'
 import userReducer from './components/utils/stores/user'
+import logReducer from './components/utils/stores/log'
 
 const store = configureStore({
   reducer: {
-    user : userReducer
+    user : userReducer,
+    log : logReducer
   }
 })
 
@@ -18,9 +20,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Provider store = {store}>
-      {/* <React.StrictMode> */}
         <App />
-      {/* </React.StrictMode> */}
     </Provider>
   </BrowserRouter>
   

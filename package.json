@@ -2,12 +2,17 @@
     "name": "phase-4-deploying-app-demo",
     "description": "Build scripts for Heroku",
     "engines": {
-      "node": "16.x"
+        "node": "16.x"
     },
     "scripts": {
-      "clean": "rm -rf public",
-      "build": "npm install --prefix client && npm run build --prefix client",
-      "deploy": "cp -a client/build/. public/",
-      "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+        "clean": "rm -rf public",
+        "build": "npm install --prefix client && npm run build --prefix client",
+        "deploy": "cp -a client/build/. public/",
+        "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+    },
+    "dependencies": {
+        "@mui/icons-material": "^5.8.4",
+        "components": "^0.1.0",
+        "styled": "^1.0.0"
     }
-  }
+}

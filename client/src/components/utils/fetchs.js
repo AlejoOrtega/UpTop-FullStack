@@ -20,7 +20,7 @@ export const getCourses = () => {
 
 //POST ----------------------------------------------
 //post response login 
-export const login = (body) => {
+export const fetchLogIn = (body) => {
     let infoPack = fetch(`/login`,{
         method:'POST',
         headers:{
@@ -34,7 +34,7 @@ export const login = (body) => {
     return infoPack
 }
 
-export const signup = (body) => {
+export const fetchSignUp = (body) => {
     let infoPack = fetch(`/signup`,{
         method:'POST',
         headers:{
@@ -85,7 +85,7 @@ export const updateUsername = (newUsername) => {
 
 //DELETE ---------------------------------------------
 //delete user
-export const logout = async() => {
+export const fetchLogOut = async() => {
     return await fetch(`/logout`,{
         method:'DELETE',
     })

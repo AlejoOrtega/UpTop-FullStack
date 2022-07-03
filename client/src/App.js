@@ -1,8 +1,8 @@
 import './App.css';
 import React, {useEffect} from 'react';
 import Landing from './pages/Landing';
-import LandingBody from './components/LandingBody'
-import ContactUs from './components/ContactUs';
+import LandingBody from './pages/LandingBody';
+import ContactUs from './pages/ContactUs';
 import Plan from './pages/Plan';
 import MyCourse from './pages/MyCourse';
 import Profile from './pages/Profile';

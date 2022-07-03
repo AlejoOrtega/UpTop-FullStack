@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import LogIn from './LogIn';
-import SignIn from './SignIn';
+import styled from "styled-components"
 import logoBlack from '../resources/images/logo-black.png'
-import { Button } from '@mui/material';
+import {Palette} from './utils/colors.js'
+import { Avatar, Button, ButtonGroup, Menu, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { signup, login, logout } from './utils/fetchs';
+import { fetchLogOut } from './utils/fetchs';
 
 import { useDispatch } from 'react-redux';
-import { saveUser, logOut } from './utils/stores/user';
+import { logOut } from './utils/stores/user';
+import { logIn, signIn } from './utils/stores/log';
 
 import { useSelector } from 'react-redux';
 
@@ -15,93 +16,141 @@ const Header = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.user.value)
-    const [error, setError] = useState('')
-    //Forms
-    const formInitialState= {
-        username: '',
-        password: '',
-        password_confirmation: ''
-    }
-    const [formData, setFormData] = useState(formInitialState)
-    const onChangeForm = (e) => {
-        let name = e.target.name, value = e.target.value
-        setFormData({...formData, [name]: value })
-    }
-    const onSubmitForm = async (e, type) => {
-        e.preventDefault()
-        let response;
-        if (type === 'login'){
-            response = await login(formData)
+    const [anchorEl, setAnchorEl] = useState(false);
+    const open = Boolean(anchorEl);
 
-        }else if(type === 'signin'){
-            response = await signup(formData)
+    //Header Menu
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
+    const handleClose = () => {
+        setAnchorEl(null);
+    }
+
+    const handleOption = (option) => {
+        switch(option){
+            case 'plan':
+                navigate('/plans')
+                break;
+            case 'course':
+                navigate('/my-courses')
+                break;
+            case 'profile':
+                navigate('/profile')
+                break;
+            case 'logout':
+                onLogOut()
+                break;
+            default:
         }
-        
-        if(response.hasOwnProperty('error')){
-            setError(response.error)
-        }else{
-            setFormData({...formInitialState})
-            setLogInSelection(false)
-            setSignInSelection(false)
-            dispatch(saveUser(response.username))
-        }
-    } 
-    //Buttons
-    const [isLogInSelected, setLogInSelection] = useState(false)
-    const [isSignInSelected, setSignInSelection] = useState(false)
+
+        handleClose()
+    }
+
     const changeLogInSelectedState = () => {
-        setLogInSelection((prev)=> !prev)
-        setSignInSelection(false)
-        setFormData({...formInitialState})
+        dispatch(logIn())
     }
     const changeSignInSelectedState = () => {
-        setSignInSelection((prev)=> !prev)
-        setLogInSelection(false)
-        setFormData({...formInitialState})
+        dispatch(signIn())
     }
 
     const onLogOut = () => {
-        logout()
+        fetchLogOut()
         dispatch(logOut())
     }
+
 
     const userLoggedIn = () => {
         if(currentUser !== ''){
             return (
                 <div style={{display: 'flex'}}>
-                    <Button variant="contained" onClick={()=>navigate('/plans')}>Plans</Button>
-                    <Button variant="contained" onClick={()=>navigate('/my-courses')}>My courses</Button>
-                    <h1 onClick={()=>navigate('/profile')}>{currentUser}</h1>
-                    <Button variant="contained" onClick={onLogOut}>Log Out</Button>
+                    <Button
+                        variant='contained'
+                        size="large"
+                        sx={{backgroundColor: Palette.SECONDARY, color: 'black'}}
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                    >
+                        <Avatar sx={{marginRight: '10px'}}alt="Profile Picture" src={logoBlack} />
+                        {currentUser}
+                    </Button>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                        }}
+                    >
+                        <MenuItem onClick={()=>handleOption('profile')}>My Profile</MenuItem>
+                        <MenuItem onClick={()=>handleOption('course')}>My Courses</MenuItem>
+                        <MenuItem onClick={()=>handleOption('plan')}>Plans</MenuItem>
+                        <MenuItem onClick={()=>handleOption('logout')}>Logout</MenuItem>
+                    </Menu>
                 </div>
             )
         }else{
             return (
                 <> 
-                    <div className='log-in-section'>
-                        <Button variant="contained" onClick={()=>navigate('/plans')}>Plans</Button>
-                        <Button variant="contained" sx={{marginRight: '10px'}} onClick={changeLogInSelectedState}>
-                            Log In
-                        </Button>
-                        <Button variant="contained" onClick={changeSignInSelectedState}>Sign In</Button>
-                    </div>
-                    { isLogInSelected? <LogIn formData={formData} onChange={onChangeForm} onSubmit={onSubmitForm} error={error}/> : null }
-                    { isSignInSelected? <SignIn formData={formData} onChange={onChangeForm} onSubmit={onSubmitForm}/> : null}
+                    <Button sx={{backgroundColor: Palette.SECONDARY, marginRight: '10px'}}variant="contained" onClick={()=>navigate('/plans')}>Plans</Button>
+                    <ButtonGroup variant="contained" aria-label="outlined button group">
+                            <Button onClick={changeLogInSelectedState}>Log In</Button>
+                            <Button onClick={changeSignInSelectedState}>Sign In</Button>  
+                    </ButtonGroup> 
                 </>    
                 );
         }
     }
     return ( 
-    <>
-        <div className='header'>
-            <h1>Up Top Trading</h1>
-            <img className='logo-header' src={logoBlack} alt='up-top-logo' onClick={()=>navigate('/')}/>
-            {userLoggedIn()}
-            
-        </div>
-    </> 
+        <MainDiv>
+            <SubDiv onClick={()=>navigate('/')}>
+                <LogoImage className='logo-header' src={logoBlack} alt='up-top-logo'/>
+                <Title>Cipher Investments</Title>
+            </SubDiv>
+            <Nav>
+                {userLoggedIn()}  
+            </Nav>
+        </MainDiv>
     );
 }
  
-export default Header;<></>
+export default Header;
+
+const MainDiv = styled.div`    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${Palette.PRIMARY};
+    height: 180px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+`;
+
+const SubDiv = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+
+    > * {
+        margin: 0 10px;
+    }
+`;
+
+
+const Title = styled.h1`
+    color: ${Palette.PRIMARY_TEXT}
+    witdh:100%;
+`;
+
+const LogoImage = styled.img`
+    width: 100px;
+    height: 100px;
+`;
+
+const Nav = styled.div`
+    margin-right: 20px;
+`;
