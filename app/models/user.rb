@@ -5,4 +5,12 @@ class User < ApplicationRecord
     has_many :courses, through: :plans
 
     validates :username, presence: true, length: {minimum: 5}, uniqueness: true
+
+    def self.getBlackList
+        users = User.where(banned: true)
+    end
+
+    def self.getWhiteList
+        users = User.where(banned: false)
+    end
 end

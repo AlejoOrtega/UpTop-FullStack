@@ -44,7 +44,7 @@ const LogIn = () => {
         }else{
             changeLogState('none')
             setFormData({...formInitialState})
-            dispatch(saveUser(response.username))
+            dispatch(saveUser(response))
         }
     } 
 

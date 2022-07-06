@@ -65,7 +65,7 @@ const Header = () => {
         if(currentUser !== ''){
             return (
                 <div style={{display: 'flex'}}>
-                    <Button sx={{backgroundColor: Palette.SECONDARY, marginRight: '10px', color: 'black'}}>Admin</Button>
+                    {currentUser.admin? <Button sx={{backgroundColor: Palette.SECONDARY, marginRight: '10px', color: 'black'}} onClick={()=>navigate('/admin')}>Admin</Button> : null }
                     <Button
                         variant='contained'
                         size="large"
@@ -76,7 +76,7 @@ const Header = () => {
                         onClick={handleClick}
                     >
                         <Avatar sx={{marginRight: '10px'}}alt="Profile Picture" src={logoBlack} />
-                        {currentUser}
+                        {currentUser.username}
                     </Button>
                     <Menu
                         id="basic-menu"

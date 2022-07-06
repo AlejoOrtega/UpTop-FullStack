@@ -17,6 +17,44 @@ export const getCourses = () => {
     return infoPack
 }
 
+export const getBannedUsers = () => {
+    let infoPack = fetch('/banned-users')
+                    .then(res => res.json())
+                    .catch(false)
+    return infoPack;
+}
+
+export const getNotBannedUsers = () => {
+    let infoPack = fetch('/not-banned-users')
+                    .then(res => res.json())
+                    .catch(false)
+    return infoPack;
+}
+
+export const getAdminCourses = () => {
+    let infoPack = fetch('/courses')
+                    .then(res => res.json())
+                    .catch(false)
+
+    return infoPack
+}
+
+export const getPlans = () => {
+    let infoPack = fetch('/plans')
+                    .then(res => res.json())
+                    .catch(false)
+
+    return infoPack;
+}
+
+export const getCourseLinks = (id) => {
+    let infoPack = fetch(`/courses/${id}/links`)
+                    .then(res => res.json())
+                    .catch(false)
+
+    return infoPack;
+}
+
 
 //POST ----------------------------------------------
 //post response login 
@@ -65,6 +103,35 @@ export const joinPlan = (typeOfPlan) => {
     return infoPack
 }
 
+export const createNewCourse = (body) => {
+    let infoPack = fetch(`/courses`,{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    .then(res=>res.json())
+    .catch((err)=>console.log(err))
+
+    return infoPack
+}
+
+export const createNewLink = (body) => {
+    console.log(body)
+    let infoPack = fetch(`/links`,{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    .then(res=>res.json())
+    .catch((err)=>console.log(err))
+
+    return infoPack
+}
+
 
 ///UPDATE ---------------------------
 //update username
@@ -83,6 +150,48 @@ export const updateUsername = (newUsername) => {
     return infoPack
 }
 
+export const changeUserBanStatus = (user, status) => {
+    let infoPack = fetch('/users/ban',{
+        method:'PATCH',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: user, banned: status})
+    })
+    .then(res => res.json())
+    .catch(()=> false)
+
+    return infoPack
+}
+
+export const updateCourseInformation = (body) => {
+    let infoPack = fetch('/courses',{
+        method:'PATCH',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+    .catch(()=> false)
+
+    return infoPack
+}
+
+export const updateLinkInformation = (body) => {
+    let infoPack = fetch('/links',{
+        method:'PATCH',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+    .catch(()=> false)
+
+    return infoPack
+}
+
 //DELETE ---------------------------------------------
 //delete user
 export const fetchLogOut = async() => {
@@ -95,6 +204,22 @@ export const fetchLogOut = async() => {
 
 export const deleteAccount = async() => {
     return await fetch('/delete-account',{
+        method:'DELETE'
+    })
+    .then(()=> true)
+    .catch(()=> false)
+}
+
+export const deleteCourse = async(id) => {
+    return await fetch(`/courses/${id}`,{
+        method:'DELETE'
+    })
+    .then(()=> true)
+    .catch(()=> false)
+}
+
+export const deleteLink = async(id) => {
+    return await fetch(`/links/${id}`,{
         method:'DELETE'
     })
     .then(()=> true)

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { deleteAccount, updateUsername } from '../components/utils/fetchs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { saveUser, logOut } from '../components/utils/stores/user';
 import { TextField, Button } from '@mui/material';
 import styled from 'styled-components';
@@ -11,6 +12,7 @@ import { Palette } from '../components/utils/colors';
 const Profile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const currentUser = useSelector(state => state.user.value)
     const [newUser, setNewUser ] = useState('')
     const onDeleteAccount = () => {
         deleteAccount()
@@ -22,13 +24,6 @@ const Profile = () => {
         let response = await updateUsername(newUser)
         console.log(response)
         dispatch(saveUser(response.username))
-    }
-
-    const currentUser={
-        name: 'alejo',
-        last_name: 'ortega',
-        email: 'some@gmail.com',
-        username: 'gosuto'
     }
 
     return ( 

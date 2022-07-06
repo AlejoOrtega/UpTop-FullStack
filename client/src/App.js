@@ -23,7 +23,7 @@ function App() {
     const checkCookies = async()=> {
       let response = await autoLogin()
       if(response.hasOwnProperty('username')){
-        dispatch(saveUser(response.username))
+        dispatch(saveUser(response))
       }
     }
 

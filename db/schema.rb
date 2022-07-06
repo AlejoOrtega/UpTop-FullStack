@@ -54,9 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_02_135414) do
     t.string "email"
     t.string "name"
     t.string "last_name"
-    t.boolean "admin"
+    t.boolean "admin", default: false, null: false
     t.string "image_url"
-    t.boolean "banned"
+    t.boolean "banned", default: false, null: false
   end
 
 end

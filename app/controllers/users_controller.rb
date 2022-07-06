@@ -33,9 +33,36 @@ class UsersController < ApplicationController
         user = User.find(session[:user_id])
         user.update(username: params[:new_username])
         render json: user, status: :ok
-        
-         
     end
+
+    def users_banned
+        if User.find(session[:user_id]).admin?
+            users_banned = User.getBlackList
+            render json: users_banned, status: :ok, each_serializer: UserColorListSerializer 
+        else
+            render json: {error: 'Not Authorized'}, status: :unauthorized
+        end
+    end
+
+    def users_not_banned
+        if User.find(session[:user_id]).admin?
+            users_not_banned = User.getWhiteList
+            render json: users_not_banned, status: :ok, each_serializer: UserColorListSerializer 
+        else
+            render json: {error: 'Not Authorized'}, status: :unauthorized
+        end
+    end
+
+    def change_user_status_banned
+        if User.find(session[:user_id]).admin?
+            user = User.find_by(username: params[:username])
+            user.update(banned: params[:banned])
+            render json: user, status: :ok
+        else
+            render json: {error: 'Not Authorized'}, status: :unauthorized
+        end
+    end
+
     private
 
     def user_params
