@@ -6,7 +6,7 @@ import ContactUs from './pages/ContactUs';
 import Plan from './pages/Plan';
 import MyCourse from './pages/MyCourse';
 import Profile from './pages/Profile';
-import Admin from './components/Admin';
+import Admin from './pages/Admin';
 
 
 import { Routes, Route } from 'react-router-dom';

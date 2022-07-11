@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { deleteAccount, updateUsername } from '../components/utils/fetchs';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { saveUser, logOut } from '../components/utils/stores/user';
@@ -26,6 +26,9 @@ const Profile = () => {
         dispatch(saveUser(response.username))
     }
 
+    if (currentUser===''){
+        return <Navigate replace to='/'/>
+    }
     return ( 
     <Body>
         <MainSection>

@@ -8,6 +8,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const MyCourse = () => {
@@ -15,6 +17,7 @@ const MyCourse = () => {
     const [courses, setCourses] = useState([])
     const [open, setOpen] = useState({});
     const [selectedLink, setLink] = useState('')
+    const currentUser = useSelector(state => state.user.value)
 
     const handleClick = (index) => {
         setOpen({...open, [index]: !open[index]});
@@ -33,6 +36,11 @@ const MyCourse = () => {
         }
         fetchCourses()
     }, [])
+
+
+    if (currentUser===''){
+        return <Navigate replace to='/'/>
+    }
     return ( 
         <Body>
             <List
