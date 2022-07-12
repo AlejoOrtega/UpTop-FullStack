@@ -10,6 +10,8 @@ import List from '../components/List';
 import { Button, TextField } from '@mui/material';
 import { Palette } from '../components/utils/colors';
 import BasicSelect from '../components/Select';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 const Admin = () => {
     const initialCourseState = {
@@ -24,6 +26,7 @@ const Admin = () => {
       link_url: '',
       course_id: '',
     }
+    const currentUser = useSelector(state => state.user.value)
     const [expanded, setExpanded] = useState(false);
     const [banned , setBanned] = useState([])
     const [notBanned, setNotBanned] = useState([])
@@ -133,7 +136,10 @@ const Admin = () => {
       }
       getInfo();
     }, [update, selectedCourse])
-  
+    
+    if (currentUser===''){
+      return <Navigate replace to='/'/>
+    } 
     return (
       <Body>
         <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>

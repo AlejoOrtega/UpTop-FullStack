@@ -17,7 +17,7 @@ export const logSlice = createSlice({
             if(state.value === 'signin'){
                 state.value = 'none'
             }else{
-                state.value = 'sigin'
+                state.value = 'signin'
             }
         },
         none:(state) => {

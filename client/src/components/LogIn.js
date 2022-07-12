@@ -45,6 +45,7 @@ const LogIn = () => {
             changeLogState('none')
             setFormData({...formInitialState})
             dispatch(saveUser(response))
+            
         }
     } 
 

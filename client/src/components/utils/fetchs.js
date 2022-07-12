@@ -73,15 +73,16 @@ export const fetchLogIn = (body) => {
 }
 
 export const fetchSignUp = (body) => {
+    
     let infoPack = fetch(`/signup`,{
         method:'POST',
         headers:{
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(body)
     })
-    .then(res=>res.json())
-    .catch((err)=>console.log(err))
+    .then(res => res.json())
+    .catch(err=>console.log(err))
 
     return infoPack
 }
